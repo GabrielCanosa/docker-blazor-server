@@ -30,15 +30,17 @@ jobs:
     - name: Build docker image
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_IMAGE: ${{ secrets.DOCKER_IMAGE }}
       run: |
         echo "Construyendo imagen de docker"
-        docker build -t $DOCKER_USER/docker-blazor-server:1.0.0 .
-        docker build -t $DOCKER_USER/docker-blazor-server .
+        docker build -t $DOCKER_USER/$DOCKER_IMAGE:1.0.0 .
+        docker build -t $DOCKER_USER/$DOCKER_IMAGE .
         
     - name: Push docker image
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_IMAGE: ${{ secrets.DOCKER_IMAGE }}
       run: |
         echo "Publicando imagen de docker"
-        docker push $DOCKER_USER/docker-blazor-server:1.0.0
-        docker push $DOCKER_USER/docker-blazor-server
+        docker push $DOCKER_USER/$DOCKER_IMAGE:1.0.0
+        docker push $DOCKER_USER/$DOCKER_IMAGE
