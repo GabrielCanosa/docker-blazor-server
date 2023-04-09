@@ -1,0 +1,47 @@
+﻿@page "/planets"
+
+<PageTitle>Planetas</PageTitle>
+
+@using SolarSystem.Data
+
+@inject PlanetService _planetService
+
+<h1>Planetas</h1>
+
+@if (planets == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Orden en el sistema solar</th>
+                <th>Masa (en Kg)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var planet in planets)
+            {
+                <tr>
+                    <td>@planet.Name</td>
+                    <td>@planet.Description</td>
+                    <td>@planet.OrderInTheSolarSystem</td>
+                    <td>@planet.Mass</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Planet>? planets;
+
+    protected override async Task OnInitializedAsync()
+    {
+        planets = _planetService.GetAllPlanets();
+    }
+}

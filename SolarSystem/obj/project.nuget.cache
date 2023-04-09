@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "PilRfWRAdTEi5LAjQ/WTyC/pbt97YDOllyIx+B0MV17yHUHDCDtpjgQKoRlS0lc6xi2xu8cu0WUmMTr931kZSQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\gusti\\source\\repos\\Docker\\SolarSystem\\SolarSystem\\SolarSystem.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gusti\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.2\\microsoft.visualstudio.azure.containers.tools.targets.1.17.2.nupkg.sha512"
+  ],
+  "logs": []
+}
