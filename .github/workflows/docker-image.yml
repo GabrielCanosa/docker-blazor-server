@@ -1,0 +1,44 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Docker login
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        echo "Iniciando login"
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+        echo "Finalizando login"
+        
+    - name: Build docker image
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      run: |
+        echo "Construyendo imagen de docker"
+        docker build -t $DOCKER_USER/docker-blazor-server:1.0.0 .
+        docker build -t $DOCKER_USER/docker-blazor-server .
+        
+    - name: Push docker image
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      run: |
+        echo "Publicando imagen de docker"
+        docker push $DOCKER_USER/docker-blazor-server:1.0.0
+        docker push $DOCKER_USER/docker-blazor-server
